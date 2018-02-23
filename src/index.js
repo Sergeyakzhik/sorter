@@ -1,31 +1,46 @@
+'use strict';
+var b;
+var comp = (left, right) => left - right;
 class Sorter {
-  constructor() {
-    // your implementation
-  }
+    constructor() {
+       b = new Array();
+    }
 
-  add(element) {
-    // your implementation
-  }
+    add(element) {
+        b.push(element);
+    }
 
-  at(index) {
-    // your implementation
-  }
+    at(index) {
+        return b[index];
+    }
 
-  get length() {
-    // your implementation
-  }
+    get length() {
+        return b.length;
+    }
 
-  toArray() {
-    // your implementation
-  }
+    toArray() {
+        return b;
+    }
 
-  sort(indices) {
-    // your implementation
-  }
+    sort(indices) {
+        var buf = [];
 
-  setComparator(compareFunction) {
-    // your implementation
-  }
+        for(var i = 0; i < indices.length; i++){
+            buf[i] = b[indices[i]];
+        }
+
+        buf.sort(comp);
+        indices.sort();
+
+        for(var i = 0; i < indices.length; i++){
+            b[indices[i]] = buf[i];
+        }
+    }
+
+    setComparator(compareFunction) {
+        comp = compareFunction;
+    }
+
 }
 
 module.exports = Sorter;
