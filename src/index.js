@@ -1,16 +1,46 @@
-/**
- * @param preferences - an array of integers. Indices of people, whom they love
- * @returns number of love triangles
- */
-module.exports = function getLoveTrianglesCount(a) {
-    let count = 0;
-    let i = 0;
+'use strict';
+var b;
+var comp = (left, right) => left - right;
+class Sorter {
+    constructor() {
+       b = new Array();
+    }
 
-    for(i = 0; i < a.length; i++) {
-        if(a[a[a[i] - 1] - 1] == i + 1) {
-            count++;
+    add(element) {
+        b.push(element);
+    }
+
+    at(index) {
+        return b[index];
+    }
+
+    get length() {
+        return b.length;
+    }
+
+    toArray() {
+        return b;
+    }
+
+    sort(indices) {
+        var buf = [];
+
+        for(var i = 0; i < indices.length; i++){
+            buf[i] = b[indices[i]];
+        }
+
+        buf.sort(comp);
+        indices.sort();
+
+        for(var i = 0; i < indices.length; i++){
+            b[indices[i]] = buf[i];
         }
     }
 
-    return Math.floor(count / 3);
-};
+    setComparator(compareFunction) {
+        comp = compareFunction;
+    }
+
+}
+
+module.exports = Sorter;
